@@ -13,8 +13,9 @@
 		08DED6A01AB067A6009B844C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08DED69F1AB067A6009B844C /* ViewController.m */; };
 		08DED6A31AB067A6009B844C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08DED6A11AB067A6009B844C /* Main.storyboard */; };
 		08DED6A51AB067A6009B844C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08DED6A41AB067A6009B844C /* Images.xcassets */; };
-		08DED6A81AB067A6009B844C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 08DED6A61AB067A6009B844C /* LaunchScreen.xib */; };
 		08DED6B41AB067A6009B844C /* WMCoreBluetoothDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 08DED6B31AB067A6009B844C /* WMCoreBluetoothDemoTests.m */; };
+		08DED6C01AB068C5009B844C /* WMCBCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 08DED6BF1AB068C5009B844C /* WMCBCenter.m */; };
+		08DED6C41AB08410009B844C /* WMCBTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 08DED6C31AB08410009B844C /* WMCBTools.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,10 +39,14 @@
 		08DED69F1AB067A6009B844C /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		08DED6A21AB067A6009B844C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		08DED6A41AB067A6009B844C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		08DED6A71AB067A6009B844C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		08DED6AD1AB067A6009B844C /* WMCoreBluetoothDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WMCoreBluetoothDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		08DED6B21AB067A6009B844C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		08DED6B31AB067A6009B844C /* WMCoreBluetoothDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WMCoreBluetoothDemoTests.m; sourceTree = "<group>"; };
+		08DED6BE1AB068C5009B844C /* WMCBCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMCBCenter.h; sourceTree = "<group>"; };
+		08DED6BF1AB068C5009B844C /* WMCBCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WMCBCenter.m; sourceTree = "<group>"; };
+		08DED6C11AB06FE9009B844C /* WMCBHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WMCBHeader.h; sourceTree = "<group>"; };
+		08DED6C21AB08410009B844C /* WMCBTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMCBTools.h; sourceTree = "<group>"; };
+		08DED6C31AB08410009B844C /* WMCBTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WMCBTools.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,13 +88,13 @@
 		08DED6931AB067A6009B844C /* WMCoreBluetoothDemo */ = {
 			isa = PBXGroup;
 			children = (
+				08DED6BD1AB067FB009B844C /* WMCBCenter */,
 				08DED6981AB067A6009B844C /* AppDelegate.h */,
 				08DED6991AB067A6009B844C /* AppDelegate.m */,
 				08DED69E1AB067A6009B844C /* ViewController.h */,
 				08DED69F1AB067A6009B844C /* ViewController.m */,
 				08DED6A11AB067A6009B844C /* Main.storyboard */,
 				08DED6A41AB067A6009B844C /* Images.xcassets */,
-				08DED6A61AB067A6009B844C /* LaunchScreen.xib */,
 				08DED69B1AB067A6009B844C /* WMCoreBluetoothDemo.xcdatamodeld */,
 				08DED6941AB067A6009B844C /* Supporting Files */,
 			);
@@ -120,6 +125,18 @@
 				08DED6B21AB067A6009B844C /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		08DED6BD1AB067FB009B844C /* WMCBCenter */ = {
+			isa = PBXGroup;
+			children = (
+				08DED6C11AB06FE9009B844C /* WMCBHeader.h */,
+				08DED6C21AB08410009B844C /* WMCBTools.h */,
+				08DED6C31AB08410009B844C /* WMCBTools.m */,
+				08DED6BE1AB068C5009B844C /* WMCBCenter.h */,
+				08DED6BF1AB068C5009B844C /* WMCBCenter.m */,
+			);
+			name = WMCBCenter;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -203,7 +220,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				08DED6A31AB067A6009B844C /* Main.storyboard in Resources */,
-				08DED6A81AB067A6009B844C /* LaunchScreen.xib in Resources */,
 				08DED6A51AB067A6009B844C /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -222,9 +238,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08DED6C41AB08410009B844C /* WMCBTools.m in Sources */,
 				08DED69A1AB067A6009B844C /* AppDelegate.m in Sources */,
 				08DED6971AB067A6009B844C /* main.m in Sources */,
 				08DED6A01AB067A6009B844C /* ViewController.m in Sources */,
+				08DED6C01AB068C5009B844C /* WMCBCenter.m in Sources */,
 				08DED69D1AB067A6009B844C /* WMCoreBluetoothDemo.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -254,14 +272,6 @@
 				08DED6A21AB067A6009B844C /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		08DED6A61AB067A6009B844C /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				08DED6A71AB067A6009B844C /* Base */,
-			);
-			name = LaunchScreen.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -349,7 +359,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = WMCoreBluetoothDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -359,7 +371,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = WMCoreBluetoothDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
