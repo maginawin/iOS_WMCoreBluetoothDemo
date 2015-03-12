@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 #import "WMCBCenter.h"
+#import "WMU3DTest.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 

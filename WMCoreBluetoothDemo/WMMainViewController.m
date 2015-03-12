@@ -28,6 +28,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    [[WMCBCenter sharedWMCBCenter] disconnectPeripheral:_mPeripheral];
     [[WMCBCenter sharedWMCBCenter] rescanPeripheralsWithRepeat:YES];
     [_mPeripheralsTV performSelectorOnMainThread:@selector(reloadData) withObject:nil waitUntilDone:NO];
 }

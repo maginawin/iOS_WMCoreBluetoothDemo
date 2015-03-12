@@ -18,6 +18,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     [WMCBCenter sharedWMCBCenter];
+    
+    WMU3DTest* test = [[WMU3DTest alloc] init];
+    testU3D();
     return YES;
 }
 

@@ -15,9 +15,6 @@
 
 @property (nonatomic, strong) CBCentralManager* mCentralManager;
 @property (nonatomic, strong) NSMutableArray* mPeripherals;
-//@property (nonatomic, strong) NSMutableArray* mConnectPeripherals;
-//@property (nonatomic, strong) NSMutableArray* mCharacteristics;
-//@property (nonatomic, strong) NSMutableArray* mConnectCharacteristics;
 
 - (void)scanPeripheralsWithRepeat:(BOOL)repeat;
 - (void)rescanPeripheralsWithRepeat:(BOOL)repeat;

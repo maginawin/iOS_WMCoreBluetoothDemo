@@ -30,9 +30,6 @@
     if (self) {
         _mCentralManager = [[CBCentralManager alloc] initWithDelegate:self queue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)];
         _mPeripherals = [[NSMutableArray alloc] init];
-//        _mConnectPeripherals = [[NSMutableArray alloc] init];
-//        _mCharacteristics = [[NSMutableArray alloc] init];
-//        _mConnectCharacteristics = [[NSMutableArray alloc] init];
         _mIsScanningPeripherals = NO;
     }
     return self;
@@ -64,19 +61,12 @@
 }
 
 - (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral {
-//    if (![_mConnectPeripherals containsObject:peripheral]) {
-//        [_mConnectPeripherals addObject:peripheral];
         peripheral.delegate = self;
         [peripheral discoverServices:nil];
         [[NSNotificationCenter defaultCenter] postNotificationName:WMCB_DID_CONNECT_PERIPHERAL object:peripheral];
-//    }
 }
 
 - (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error {
-//    if ([_mConnectPeripherals containsObject:peripheral]) {
-//        [_mConnectCharacteristics removeObjectAtIndex:[_mConnectPeripherals indexOfObject:peripheral]];
-//        [_mConnectPeripherals removeObject:peripheral];
-//    }
     [[NSNotificationCenter defaultCenter] postNotificationName:WMCB_DID_DISCONNECT_PERIPHERAL object:peripheral];
 }
 
@@ -90,12 +80,6 @@
 }
 
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error {
-//    NSMutableArray* mChars = [[NSMutableArray alloc] init];
-    for (CBCharacteristic* c in service.characteristics) {
-//        [mChars addObject:c];
-//        NSLog(@"c : %@", [NSString stringWithFormat:@"%@", c.value]);
-    }
-//    [_mConnectCharacteristics addObject:mChars];
     [[NSNotificationCenter defaultCenter] postNotificationName:WMCB_DID_DISCOVER_CHARACTERISTICS object:service.characteristics];
 }
 
@@ -151,12 +135,6 @@
     [self stopScanPeripherals];
     _mPeripherals = nil;
     _mPeripherals = [[NSMutableArray alloc] init];
-//    _mConnectPeripherals = nil;
-//    _mConnectPeripherals = [[NSMutableArray alloc] init];
-//    _mCharacteristics = nil;
-//    _mCharacteristics = [[NSMutableArray alloc] init];
-//    _mConnectCharacteristics = nil;
-//    _mConnectCharacteristics = [[NSMutableArray alloc] init];
     [self scanPeripheralsWithRepeat:repeat];
 }
 

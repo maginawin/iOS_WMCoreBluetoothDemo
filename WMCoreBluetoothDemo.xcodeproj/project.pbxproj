@@ -10,6 +10,8 @@
 		0834449E1AB121E2007926B0 /* WMMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0834449D1AB121E2007926B0 /* WMMainViewController.m */; };
 		083444A11AB12CA0007926B0 /* WMServicesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 083444A01AB12CA0007926B0 /* WMServicesTableViewController.m */; };
 		083444A41AB1380E007926B0 /* WMCharTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 083444A31AB1380E007926B0 /* WMCharTableViewController.m */; };
+		083444A91AB167ED007926B0 /* WMU3DTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 083444A81AB167ED007926B0 /* WMU3DTest.m */; };
+		083444CE1AB17462007926B0 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 083444CD1AB17462007926B0 /* GameKit.framework */; };
 		08DED6971AB067A6009B844C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 08DED6961AB067A6009B844C /* main.m */; };
 		08DED69A1AB067A6009B844C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 08DED6991AB067A6009B844C /* AppDelegate.m */; };
 		08DED69D1AB067A6009B844C /* WMCoreBluetoothDemo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 08DED69B1AB067A6009B844C /* WMCoreBluetoothDemo.xcdatamodeld */; };
@@ -37,6 +39,9 @@
 		083444A01AB12CA0007926B0 /* WMServicesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WMServicesTableViewController.m; sourceTree = "<group>"; };
 		083444A21AB1380E007926B0 /* WMCharTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMCharTableViewController.h; sourceTree = "<group>"; };
 		083444A31AB1380E007926B0 /* WMCharTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WMCharTableViewController.m; sourceTree = "<group>"; };
+		083444A71AB167ED007926B0 /* WMU3DTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMU3DTest.h; sourceTree = "<group>"; };
+		083444A81AB167ED007926B0 /* WMU3DTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WMU3DTest.m; sourceTree = "<group>"; };
+		083444CD1AB17462007926B0 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		08DED6911AB067A6009B844C /* WMCoreBluetoothDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WMCoreBluetoothDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		08DED6951AB067A6009B844C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		08DED6961AB067A6009B844C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -60,6 +65,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				083444CE1AB17462007926B0 /* GameKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,9 +92,19 @@
 			name = "WM View Controller";
 			sourceTree = "<group>";
 		};
+		083444A61AB167B5007926B0 /* WM U3D Test */ = {
+			isa = PBXGroup;
+			children = (
+				083444A71AB167ED007926B0 /* WMU3DTest.h */,
+				083444A81AB167ED007926B0 /* WMU3DTest.m */,
+			);
+			name = "WM U3D Test";
+			sourceTree = "<group>";
+		};
 		08DED6881AB067A6009B844C = {
 			isa = PBXGroup;
 			children = (
+				083444CD1AB17462007926B0 /* GameKit.framework */,
 				08DED6931AB067A6009B844C /* WMCoreBluetoothDemo */,
 				08DED6B01AB067A6009B844C /* WMCoreBluetoothDemoTests */,
 				08DED6921AB067A6009B844C /* Products */,
@@ -107,6 +123,7 @@
 		08DED6931AB067A6009B844C /* WMCoreBluetoothDemo */ = {
 			isa = PBXGroup;
 			children = (
+				083444A61AB167B5007926B0 /* WM U3D Test */,
 				08DED6BD1AB067FB009B844C /* WM CB Center */,
 				083444A51AB1440D007926B0 /* WM View Controller */,
 				08DED6981AB067A6009B844C /* AppDelegate.h */,
@@ -264,6 +281,7 @@
 				0834449E1AB121E2007926B0 /* WMMainViewController.m in Sources */,
 				083444A11AB12CA0007926B0 /* WMServicesTableViewController.m in Sources */,
 				083444A41AB1380E007926B0 /* WMCharTableViewController.m in Sources */,
+				083444A91AB167ED007926B0 /* WMU3DTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
