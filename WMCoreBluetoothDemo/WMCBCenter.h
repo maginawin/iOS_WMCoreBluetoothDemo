@@ -11,9 +11,20 @@
 
 @interface WMCBCenter : NSObject <CBCentralManagerDelegate, CBPeripheralDelegate>
 
-@property (nonatomic, strong) CBCentralManager* iCentralManager;
-@property (nonatomic, strong) NSMutableArray* iPeripheralsArray;
-@property (nonatomic, strong) NSMutableArray* iConnectedPeripheralsArray;
-@property (nonatomic, strong) NSMutableArray* iCharacteristicsArray;
++ (instancetype)sharedWMCBCenter;
+
+@property (nonatomic, strong) CBCentralManager* mCentralManager;
+@property (nonatomic, strong) NSMutableArray* mPeripherals;
+//@property (nonatomic, strong) NSMutableArray* mConnectPeripherals;
+//@property (nonatomic, strong) NSMutableArray* mCharacteristics;
+//@property (nonatomic, strong) NSMutableArray* mConnectCharacteristics;
+
+- (void)scanPeripheralsWithRepeat:(BOOL)repeat;
+- (void)rescanPeripheralsWithRepeat:(BOOL)repeat;
+- (void)stopScanPeripherals;
+- (void)connectPeripheral:(CBPeripheral*)peripheral;
+- (void)disconnectPeripheral:(CBPeripheral*)peripheral;
+- (void)writeValue:(NSString*)value toPeripheral:(CBPeripheral*)peripheral byCharacteristic:(CBCharacteristic*)characteristic withResponse:(BOOL)response;
+- (void)readCharacteristic:(CBCharacteristic*)characteristic fromPeripheral:(CBPeripheral*)peripheral repeat:(BOOL)repeat everySeconds:(NSInteger)interval;
 
 @end

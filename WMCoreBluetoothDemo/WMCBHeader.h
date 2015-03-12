@@ -11,9 +11,17 @@
 
 #import <CoreBluetooth/CoreBluetooth.h>
 
-#define WM_CENTRAL_MANAGER_STATE_POWEREDOFF @"WMCentralManagerStatePoweredOff"
-#define WM_CENTRAL_MANAGER_STATE_POWEREDON @"WMCentralManagerStatePoweredOn"
+#define WMCB_STATE_POWEREDOFF @"WMCBStatePoweredOff"
+#define WMCB_STATE_POWEREDON @"WMCBStatePoweredOn"
 
-#define WM_CENTRAL_MANAGER_SCAN_POWEREDOFF @"WMCentralManagerScanPoweredOff"
+#define WMCB_SCAN_POWEREDOFF @"WMCBScanPoweredOff"
+#define WMCB_DID_CONNECT_PERIPHERAL @"WMCBDidConnectPeripheral"
+#define WMCB_DID_DISCONNECT_PERIPHERAL @"WMCBDidDisconnectPeripheral"
+#define WMCB_DID_DISCOVER_PERIPHERAL @"WMCBDidDiscoverPeripheral"
+#define WMCB_DID_DISCOVER_SERVICES @"WMCBDidDiscoverServices"
+#define WMCB_DID_DISCOVER_CHARACTERISTICS @"WMCBDidDiscoverCharacteristics"
+#define WMCB_DID_UPDATE_VALUE @"WMCBDidUpdateValue"
+#define WMCB_DID_WRITE_VALUE @"WMCBDidWriteValue"
+#define WMCB_DID_READ_RSSI @"WMCBDidReadRSSI"
 
 #endif

@@ -7,10 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0834449E1AB121E2007926B0 /* WMMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0834449D1AB121E2007926B0 /* WMMainViewController.m */; };
+		083444A11AB12CA0007926B0 /* WMServicesTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 083444A01AB12CA0007926B0 /* WMServicesTableViewController.m */; };
+		083444A41AB1380E007926B0 /* WMCharTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 083444A31AB1380E007926B0 /* WMCharTableViewController.m */; };
 		08DED6971AB067A6009B844C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 08DED6961AB067A6009B844C /* main.m */; };
 		08DED69A1AB067A6009B844C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 08DED6991AB067A6009B844C /* AppDelegate.m */; };
 		08DED69D1AB067A6009B844C /* WMCoreBluetoothDemo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 08DED69B1AB067A6009B844C /* WMCoreBluetoothDemo.xcdatamodeld */; };
-		08DED6A01AB067A6009B844C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 08DED69F1AB067A6009B844C /* ViewController.m */; };
 		08DED6A31AB067A6009B844C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08DED6A11AB067A6009B844C /* Main.storyboard */; };
 		08DED6A51AB067A6009B844C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08DED6A41AB067A6009B844C /* Images.xcassets */; };
 		08DED6B41AB067A6009B844C /* WMCoreBluetoothDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 08DED6B31AB067A6009B844C /* WMCoreBluetoothDemoTests.m */; };
@@ -29,14 +31,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0834449C1AB121E2007926B0 /* WMMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMMainViewController.h; sourceTree = "<group>"; };
+		0834449D1AB121E2007926B0 /* WMMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WMMainViewController.m; sourceTree = "<group>"; };
+		0834449F1AB12CA0007926B0 /* WMServicesTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMServicesTableViewController.h; sourceTree = "<group>"; };
+		083444A01AB12CA0007926B0 /* WMServicesTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WMServicesTableViewController.m; sourceTree = "<group>"; };
+		083444A21AB1380E007926B0 /* WMCharTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WMCharTableViewController.h; sourceTree = "<group>"; };
+		083444A31AB1380E007926B0 /* WMCharTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WMCharTableViewController.m; sourceTree = "<group>"; };
 		08DED6911AB067A6009B844C /* WMCoreBluetoothDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WMCoreBluetoothDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		08DED6951AB067A6009B844C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		08DED6961AB067A6009B844C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		08DED6981AB067A6009B844C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		08DED6991AB067A6009B844C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		08DED69C1AB067A6009B844C /* WMCoreBluetoothDemo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = WMCoreBluetoothDemo.xcdatamodel; sourceTree = "<group>"; };
-		08DED69E1AB067A6009B844C /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		08DED69F1AB067A6009B844C /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		08DED6A21AB067A6009B844C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		08DED6A41AB067A6009B844C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		08DED6AD1AB067A6009B844C /* WMCoreBluetoothDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WMCoreBluetoothDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -67,6 +73,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		083444A51AB1440D007926B0 /* WM View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				0834449C1AB121E2007926B0 /* WMMainViewController.h */,
+				0834449D1AB121E2007926B0 /* WMMainViewController.m */,
+				0834449F1AB12CA0007926B0 /* WMServicesTableViewController.h */,
+				083444A01AB12CA0007926B0 /* WMServicesTableViewController.m */,
+				083444A21AB1380E007926B0 /* WMCharTableViewController.h */,
+				083444A31AB1380E007926B0 /* WMCharTableViewController.m */,
+			);
+			name = "WM View Controller";
+			sourceTree = "<group>";
+		};
 		08DED6881AB067A6009B844C = {
 			isa = PBXGroup;
 			children = (
@@ -88,11 +107,10 @@
 		08DED6931AB067A6009B844C /* WMCoreBluetoothDemo */ = {
 			isa = PBXGroup;
 			children = (
-				08DED6BD1AB067FB009B844C /* WMCBCenter */,
+				08DED6BD1AB067FB009B844C /* WM CB Center */,
+				083444A51AB1440D007926B0 /* WM View Controller */,
 				08DED6981AB067A6009B844C /* AppDelegate.h */,
 				08DED6991AB067A6009B844C /* AppDelegate.m */,
-				08DED69E1AB067A6009B844C /* ViewController.h */,
-				08DED69F1AB067A6009B844C /* ViewController.m */,
 				08DED6A11AB067A6009B844C /* Main.storyboard */,
 				08DED6A41AB067A6009B844C /* Images.xcassets */,
 				08DED69B1AB067A6009B844C /* WMCoreBluetoothDemo.xcdatamodeld */,
@@ -127,7 +145,7 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		08DED6BD1AB067FB009B844C /* WMCBCenter */ = {
+		08DED6BD1AB067FB009B844C /* WM CB Center */ = {
 			isa = PBXGroup;
 			children = (
 				08DED6C11AB06FE9009B844C /* WMCBHeader.h */,
@@ -136,7 +154,7 @@
 				08DED6BE1AB068C5009B844C /* WMCBCenter.h */,
 				08DED6BF1AB068C5009B844C /* WMCBCenter.m */,
 			);
-			name = WMCBCenter;
+			name = "WM CB Center";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -241,9 +259,11 @@
 				08DED6C41AB08410009B844C /* WMCBTools.m in Sources */,
 				08DED69A1AB067A6009B844C /* AppDelegate.m in Sources */,
 				08DED6971AB067A6009B844C /* main.m in Sources */,
-				08DED6A01AB067A6009B844C /* ViewController.m in Sources */,
 				08DED6C01AB068C5009B844C /* WMCBCenter.m in Sources */,
 				08DED69D1AB067A6009B844C /* WMCoreBluetoothDemo.xcdatamodeld in Sources */,
+				0834449E1AB121E2007926B0 /* WMMainViewController.m in Sources */,
+				083444A11AB12CA0007926B0 /* WMServicesTableViewController.m in Sources */,
+				083444A41AB1380E007926B0 /* WMCharTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -432,6 +452,7 @@
 				08DED6B91AB067A6009B844C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		08DED6BA1AB067A6009B844C /* Build configuration list for PBXNativeTarget "WMCoreBluetoothDemoTests" */ = {
 			isa = XCConfigurationList;
@@ -440,6 +461,7 @@
 				08DED6BC1AB067A6009B844C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

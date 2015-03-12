@@ -28,10 +28,11 @@
 - (instancetype)initWithDelegate {
     self = [super init];
     if (self) {
-        _iCentralManager = [[CBCentralManager alloc] initWithDelegate:self queue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)];
-        _iPeripheralsArray = [[NSMutableArray alloc] init];
-        _iConnectedPeripheralsArray = [[NSMutableArray alloc] init];
-        _iCharacteristicsArray = [[NSMutableArray alloc] init];
+        _mCentralManager = [[CBCentralManager alloc] initWithDelegate:self queue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)];
+        _mPeripherals = [[NSMutableArray alloc] init];
+//        _mConnectPeripherals = [[NSMutableArray alloc] init];
+//        _mCharacteristics = [[NSMutableArray alloc] init];
+//        _mConnectCharacteristics = [[NSMutableArray alloc] init];
         _mIsScanningPeripherals = NO;
     }
     return self;
@@ -56,29 +57,51 @@
 }
 
 - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI {
-
+    if (![_mPeripherals containsObject:peripheral]) {
+        [_mPeripherals addObject:peripheral];
+        [[NSNotificationCenter defaultCenter] postNotificationName:WMCB_DID_DISCOVER_PERIPHERAL object:peripheral];
+    }
 }
 
 - (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral {
-
+//    if (![_mConnectPeripherals containsObject:peripheral]) {
+//        [_mConnectPeripherals addObject:peripheral];
+        peripheral.delegate = self;
+        [peripheral discoverServices:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:WMCB_DID_CONNECT_PERIPHERAL object:peripheral];
+//    }
 }
 
 - (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error {
-
+//    if ([_mConnectPeripherals containsObject:peripheral]) {
+//        [_mConnectCharacteristics removeObjectAtIndex:[_mConnectPeripherals indexOfObject:peripheral]];
+//        [_mConnectPeripherals removeObject:peripheral];
+//    }
+    [[NSNotificationCenter defaultCenter] postNotificationName:WMCB_DID_DISCONNECT_PERIPHERAL object:peripheral];
 }
 
 #pragma mark - CB Peripheral Delegate
 
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverServices:(NSError *)error {
-
+    for (CBService* service in peripheral.services) {
+        [peripheral discoverCharacteristics:nil forService:service];
+    }
+    [[NSNotificationCenter defaultCenter] postNotificationName:WMCB_DID_DISCOVER_SERVICES object:peripheral.services];
 }
 
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error {
-
+//    NSMutableArray* mChars = [[NSMutableArray alloc] init];
+    for (CBCharacteristic* c in service.characteristics) {
+//        [mChars addObject:c];
+//        NSLog(@"c : %@", [NSString stringWithFormat:@"%@", c.value]);
+    }
+//    [_mConnectCharacteristics addObject:mChars];
+    [[NSNotificationCenter defaultCenter] postNotificationName:WMCB_DID_DISCOVER_CHARACTERISTICS object:service.characteristics];
 }
 
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error {
-
+//    NSLog(@"c : %@", [NSString stringWithFormat:@"%@", characteristic.value]);
+    [[NSNotificationCenter defaultCenter] postNotificationName:WMCB_DID_UPDATE_VALUE object:characteristic];
 }
 
 - (void)peripheral:(CBPeripheral *)peripheral didWriteValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error {
@@ -99,14 +122,14 @@
 
 - (void)scanPeripheralsWithRepeat:(BOOL)repeat {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^ {
-        if (_iCentralManager.state == CBCentralManagerStatePoweredOn) {
+        if (_mCentralManager.state == CBCentralManagerStatePoweredOn) {
             if (!_mIsScanningPeripherals) {
                 _mIsScanningPeripherals = YES;
                 NSDictionary* scanOptions = [NSDictionary dictionaryWithObject:[NSNumber numberWithBool:NO] forKey:CBCentralManagerScanOptionAllowDuplicatesKey];
-                [_iCentralManager scanForPeripheralsWithServices:nil options:scanOptions];
+                [_mCentralManager scanForPeripheralsWithServices:nil options:scanOptions];
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     if (_mIsScanningPeripherals) {
-                        [_iCentralManager stopScan];
+                        [_mCentralManager stopScan];
                         _mIsScanningPeripherals = NO;
                         if (repeat) {
                             [self scanPeripheralsWithRepeat:YES];
@@ -114,42 +137,47 @@
                     }
                 });
             } else {
-                [_iCentralManager stopScan];
+                [_mCentralManager stopScan];
                 _mIsScanningPeripherals = NO;
                 [self scanPeripheralsWithRepeat:repeat];
             }
         } else {
-            [[NSNotificationCenter defaultCenter] postNotificationName:WM_CENTRAL_MANAGER_SCAN_POWEREDOFF object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:WMCB_SCAN_POWEREDOFF object:nil];
         }
     });
 }
 
 - (void)rescanPeripheralsWithRepeat:(BOOL)repeat {
-    _iPeripheralsArray = nil;
-    _iPeripheralsArray = [[NSMutableArray alloc] init];
-    [_iCentralManager stopScan];
-    _mIsScanningPeripherals = NO;
+    [self stopScanPeripherals];
+    _mPeripherals = nil;
+    _mPeripherals = [[NSMutableArray alloc] init];
+//    _mConnectPeripherals = nil;
+//    _mConnectPeripherals = [[NSMutableArray alloc] init];
+//    _mCharacteristics = nil;
+//    _mCharacteristics = [[NSMutableArray alloc] init];
+//    _mConnectCharacteristics = nil;
+//    _mConnectCharacteristics = [[NSMutableArray alloc] init];
     [self scanPeripheralsWithRepeat:repeat];
 }
 
 - (void)stopScanPeripherals {
-    [_iCentralManager stopScan];
+    [_mCentralManager stopScan];
     _mIsScanningPeripherals = NO;
 }
 
 - (void)connectPeripheral:(CBPeripheral*)peripheral {
     if (peripheral) {
-        [_iCentralManager connectPeripheral:peripheral options:nil];
+        [_mCentralManager connectPeripheral:peripheral options:nil];
     }
 }
 
 - (void)disconnectPeripheral:(CBPeripheral*)peripheral {
     if (peripheral && peripheral.state == CBPeripheralStateConnected) {
-        [_iCentralManager cancelPeripheralConnection:peripheral];
+        [_mCentralManager cancelPeripheralConnection:peripheral];
     }
 }
 
-- (void)writeValue:(NSString*)value toPeripheral:(CBPeripheral*)peripheral toCharacteristic:(CBCharacteristic*)characteristic withResponse:(BOOL)response {
+- (void)writeValue:(NSString*)value toPeripheral:(CBPeripheral*)peripheral byCharacteristic:(CBCharacteristic*)characteristic withResponse:(BOOL)response {
     if (value && peripheral && peripheral.state == CBPeripheralStateConnected) {
         if (response) {
             [peripheral writeValue:nil forCharacteristic:characteristic type:CBCharacteristicWriteWithResponse];
