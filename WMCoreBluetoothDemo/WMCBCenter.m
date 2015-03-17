@@ -12,6 +12,14 @@
 
 @property (nonatomic) BOOL mIsScanningPeripherals;
 
+@property (nonatomic) NSMutableArray* mCharacteristics;
+
+@property (nonatomic) NSInteger mCTag;
+@property (nonatomic) BOOL c0;
+@property (nonatomic) BOOL c1;
+@property (nonatomic) BOOL c2;
+@property (nonatomic) BOOL c3;
+
 @end
 
 @implementation WMCBCenter
@@ -31,7 +39,10 @@ const char* gameObjectName;
     if (self) {
         _mCentralManager = [[CBCentralManager alloc] initWithDelegate:self queue:dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)];
         _mPeripherals = [[NSMutableArray alloc] init];
+        _mCharacteristics = [[NSMutableArray alloc] init];
         _mIsScanningPeripherals = NO;
+        _mCTag = 0;
+        _c0 = _c1 = _c2 = _c3 = NO;
     }
     return self;
 }
@@ -59,11 +70,21 @@ const char* gameObjectName;
         [_mPeripherals addObject:peripheral];
         [[NSNotificationCenter defaultCenter] postNotificationName:WMCB_DID_DISCOVER_PERIPHERAL object:peripheral];
     }
+    if ([peripheral.name isEqualToString:@"IZOOCA BRIDGE"]) {
+        NSLog(@"找到 IZOOCA BRIDGE, 停止查找设备, 准备连接 IZOOCA...");
+        [self stopScanPeripherals];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self connectPeripheral:peripheral];
+        });
+    }
 }
 
 - (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral {
         peripheral.delegate = self;
         [peripheral discoverServices:nil];
+    if ([peripheral.name isEqualToString:@"IZOOCA BRIDGE"]) {
+        NSLog(@"已经连接上 IZOOCA BRIDGE, 准备查找 Characteristics...");
+    }
         [[NSNotificationCenter defaultCenter] postNotificationName:WMCB_DID_CONNECT_PERIPHERAL object:peripheral];
 }
 
@@ -81,10 +102,56 @@ const char* gameObjectName;
 }
 
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error {
+    if ([service.UUID isEqual:[CBUUID UUIDWithString:@"C35232EA-5E47-486D-A1E8-9502EA284F90"]]) {
+        for (CBCharacteristic* c in service.characteristics) {
+            if ([c.UUID isEqual:[CBUUID UUIDWithString:@"6E16485F-E936-4665-BF03-D339275831F2"]]) {
+                [_mCharacteristics addObject:c];
+            }
+        }
+        if (_mCharacteristics.count == 4) {
+            NSLog(@"Characteristics 已经找到, 准备监听 (Read value)");
+            [self repeatReadCharacteristicsFromPeripheral:peripheral];
+        } else {
+            [self disconnectPeripheral:peripheral];
+            [self rescanPeripheralsWithRepeat:YES];
+        }
+    }
     [[NSNotificationCenter defaultCenter] postNotificationName:WMCB_DID_DISCOVER_CHARACTERISTICS object:service.characteristics];
 }
 
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error {
+    NSString* valueString = [WMCBCenter hexadecimalString:characteristic.value];
+    if ([valueString containsString:@"58794F59"]) {
+        
+    } else if ([valueString containsString:@"798C647C"]) {
+        
+    } else if ([valueString isEqualToString:@""] || valueString == nil) {
+    
+    }
+    
+    switch (_mCTag) {
+        case 0: {
+            
+            break;
+        }
+        case 1: {
+            break;
+        }
+        case 2: {
+            break;
+        }
+        case 3: {
+            break;
+        }
+
+            
+        default:
+            break;
+    }
+    _mCTag += 1;
+    if (_mCTag > 3) {
+        _mCTag = 0;
+    }
 //    NSLog(@"c : %@", [NSString stringWithFormat:@"%@", characteristic.value]);
     [[NSNotificationCenter defaultCenter] postNotificationName:WMCB_DID_UPDATE_VALUE object:characteristic];
 }
@@ -136,6 +203,9 @@ const char* gameObjectName;
     [self stopScanPeripherals];
     _mPeripherals = nil;
     _mPeripherals = [[NSMutableArray alloc] init];
+    _mCharacteristics = nil;
+    _mCharacteristics = [[NSMutableArray alloc] init];
+    _c0 = _c1 = _c2 = _c3 = NO;
     [self scanPeripheralsWithRepeat:repeat];
 }
 
@@ -179,6 +249,21 @@ const char* gameObjectName;
     }
 }
 
+- (void)repeatReadCharacteristicsFromPeripheral:(CBPeripheral*)peripheral {
+    if (_mCharacteristics.count > 0 && peripheral.state == CBPeripheralStateConnected) {
+        for (int i = 0; i < _mCharacteristics.count; i++) {
+            [peripheral readValueForCharacteristic:_mCharacteristics[i]];
+        }
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self repeatReadCharacteristicsFromPeripheral:peripheral];
+        });
+    }
+}
+
+- (void)readCharacteristic:(CBCharacteristic*)characteristic fromPeripheral:(CBPeripheral*)peripheral {
+    [peripheral readValueForCharacteristic:characteristic];
+}
+
 #pragma mark - Methods for U3D
 
 void connectBLEWithName() {
@@ -187,6 +272,23 @@ void connectBLEWithName() {
 
 void initiOSInteraction(const char * unityGameObjectName) {
     gameObjectName = unityGameObjectName;
+}
+
+#pragma mark - Methods for CB
+
++ (NSString*)hexadecimalString:(NSData *)data{
+    NSString* result;
+    const unsigned char* dataBuffer = (const unsigned char*)[data bytes];
+    if(!dataBuffer){
+        return nil;
+    }
+    NSUInteger dataLength = [data length];
+    NSMutableString* hexString = [NSMutableString stringWithCapacity:(dataLength * 2)];
+    for(int i = 0; i < dataLength; i++){
+        [hexString appendString:[NSString stringWithFormat:@"%02lx", (unsigned long)dataBuffer[i]]];
+    }
+    result = [NSString stringWithString:hexString];
+    return result;
 }
 
 @end
