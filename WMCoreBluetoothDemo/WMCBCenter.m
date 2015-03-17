@@ -15,6 +15,7 @@
 @end
 
 @implementation WMCBCenter
+const char* gameObjectName;
 
 + (instancetype)sharedWMCBCenter {
     static id sharedInstance = nil;
@@ -170,6 +171,16 @@
             }
         });
     }
+}
+
+#pragma mark - Methods for U3D
+
+void connectBLEWithName() {
+    [[WMCBCenter sharedWMCBCenter] rescanPeripheralsWithRepeat:YES];
+}
+
+void initiOSInteraction(const char * unityGameObjectName) {
+    gameObjectName = unityGameObjectName;
 }
 
 @end
